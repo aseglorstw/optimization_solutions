@@ -13,19 +13,29 @@ class BlockWorldHeuristic(BlockWorld):
 	def heuristic(self, goal_):
 		self_state = list(self.get_state())
 		goal_state = list(goal_.get_state())
-		hamming_distance = sum(a != b for a, b in zip(sorted(self_state), sorted(goal_state)))
+
+		misplaced_blocks = sum(
+			a != b for stack_a, stack_b in zip(self_state, goal_state) for a, b in zip(stack_a, stack_b))
+
+		unsorted_stacks = sum(
+			1 for stack_a, stack_b in zip(self_state, goal_state) if sorted(stack_a) != sorted(stack_b))
+
+
+
 		current_positions = {block: (i, j) for i, stack in enumerate(self_state) for j, block in enumerate(stack)}
 		target_positions = {block: (i, j) for i, stack in enumerate(goal_state) for j, block in enumerate(stack)}
 		chebyshev_distance = 0
 		manhattan_distance = 0
-		diffs = 0
 		for block, current_pos in current_positions.items():
 			target_pos = target_positions[block]
 			chebyshev_distance += max(abs(current_pos[0] - target_pos[0]), abs(current_pos[1] - target_pos[1]))
 			manhattan_distance += abs(current_pos[0] - target_pos[0]) + abs(current_pos[1] - target_pos[1])
-			if target_pos != current_pos:
-				diffs += 1
-		return 1/3*manhattan_distance
+
+
+		#Pocitala jsem kolik presunu je potreba (porovnavani sloupcu)
+		#A když spočítáš, kolik jich není na správném místě, tak to je za 10
+		#Pokud ti staci 6 bodu, tak muzes pocitat, kolik krabic je na spravnem miste, takze v podstate kazdy sloupec beres od zadu a dokud jsou na spravne pozici, tak pricitas.
+		return 7*misplaced_blocks + 5*unsorted_stacks + manhattan_distance
 
 
 class AStar:
