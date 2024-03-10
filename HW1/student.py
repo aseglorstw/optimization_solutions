@@ -1,5 +1,5 @@
 from blockworld import BlockWorld
-from copy import deepcopy
+import numpy as np
 from queue import PriorityQueue
 
 
@@ -11,11 +11,17 @@ class BlockWorldHeuristic(BlockWorld):
 		self.history = (None, None)
 
 	def heuristic(self, goal_):
-		self_state = self.get_state()
-		goal_state = goal_.get_state()
+		self_state = list(self.get_state())
+		goal_state = list(goal_.get_state())
 		hamming_distance = sum(a != b for a, b in zip(sorted(self_state), sorted(goal_state)))
 		misplaced_blocks = len(set(self_state) - set(goal_state))
-		return hamming_distance + misplaced_blocks
+		current_positions = {block: (i, j) for i, stack in enumerate(self_state) for j, block in enumerate(stack)}
+		target_positions = {block: (i, j) for i, stack in enumerate(goal_state) for j, block in enumerate(stack)}
+		chebyshev_distance = 0
+		for block, current_pos in current_positions.items():
+			target_pos = target_positions[block]
+			chebyshev_distance += max(abs(current_pos[0] - target_pos[0]), abs(current_pos[1] - target_pos[1]))
+		return hamming_distance + chebyshev_distance
 
 
 class AStar:
