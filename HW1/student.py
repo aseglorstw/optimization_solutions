@@ -18,10 +18,12 @@ class BlockWorldHeuristic(BlockWorld):
 		current_positions = {block: (i, j) for i, stack in enumerate(self_state) for j, block in enumerate(stack)}
 		target_positions = {block: (i, j) for i, stack in enumerate(goal_state) for j, block in enumerate(stack)}
 		chebyshev_distance = 0
+		manhattan_distance = 0
 		for block, current_pos in current_positions.items():
 			target_pos = target_positions[block]
 			chebyshev_distance += max(abs(current_pos[0] - target_pos[0]), abs(current_pos[1] - target_pos[1]))
-		return hamming_distance + chebyshev_distance
+			manhattan_distance += abs(current_pos[0] - target_pos[0]) + abs(current_pos[1] - target_pos[1])
+		return hamming_distance + chebyshev_distance + manhattan_distance
 
 
 class AStar:
@@ -45,7 +47,7 @@ class AStar:
 			for action, neighbor in current.get_neighbors():
 				next_ = BlockWorldHeuristic(state=str(neighbor))
 				next_.history = (action, current)
-				next_.cost = current.cost + 1
+				next_.cost = current.cost + 0.01
 				priority = next_.heuristic(goal_) + next_.cost
 				priority_queue.put((priority, next_))
 		return []
