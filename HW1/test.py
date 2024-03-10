@@ -1,20 +1,19 @@
-import numpy as np
-
-
-def chebyshev_distance(state, target):
-    current_positions = {block: (i, j) for i, stack in enumerate(state) for j, block in enumerate(stack)}
-    target_positions = {block: (i, j) for i, stack in enumerate(target) for j, block in enumerate(stack)}
+def heuristic(goal_):
+    self_state = list(self.get_state())
+    goal_state = list(goal_.get_state())
+    hamming_distance = sum(a != b for a, b in zip(sorted(self_state), sorted(goal_state)))
+    current_positions = {block: (i, j) for i, stack in enumerate(self_state) for j, block in enumerate(stack)}
+    target_positions = {block: (i, j) for i, stack in enumerate(goal_state) for j, block in enumerate(stack)}
     chebyshev_distance = 0
+    manhattan_distance = 0
+    diffs = 0
     for block, current_pos in current_positions.items():
         target_pos = target_positions[block]
         chebyshev_distance += max(abs(current_pos[0] - target_pos[0]), abs(current_pos[1] - target_pos[1]))
+        manhattan_distance += abs(current_pos[0] - target_pos[0]) + abs(current_pos[1] - target_pos[1])
+        if target_pos != current_pos:
+            diffs += 1
     return chebyshev_distance
 
 
-
-# Пример использования
-current_state = [[1, 2, 3], [4]]
-target_state = [[4, 2], [3, 1]]
-
-result = chebyshev_distance(current_state, target_state)
-print(result)
+print(heuristic())
