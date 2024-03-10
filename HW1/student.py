@@ -7,28 +7,28 @@ class BlockWorldHeuristic(BlockWorld):
 
 	def __init__(self, num_blocks=5, state=None):
 		BlockWorld.__init__(self, num_blocks, state)
+		self.cost = 0
+		self.history = (None, None)
 
 	def heuristic(self, goal_):
 		self_state = self.get_state()
 		goal_state = goal_.get_state()
-		return 0.
+		hamming_distance = sum(a != b for a, b in zip(sorted(self_state), sorted(goal_state)))
+		misplaced_blocks = len(set(self_state) - set(goal_state))
+		return hamming_distance + misplaced_blocks
 
 
 class AStar:
 
 	def __init__(self):
-		self.closed_nodes, self.histories, self.costs, self.priorities = dict(), dict(), dict(), dict()
+		self.closed_nodes = dict()
 
 	def search(self, init, goal_):
 		priority_queue = PriorityQueue()
-		self.histories[init] = (None, None)
-		self.costs[init] = 0
-		self.priorities[init] = 0
-		priority_queue.put((self.costs[init], init))
-
+		priority_queue.put((0, init))
 		while not priority_queue.empty():
-			priority, current = priority_queue.get()
-			action, prev = self.histories[current]
+			_, current = priority_queue.get()
+			action, prev = current.history
 			if current.get_state() == goal_.get_state():
 				self.closed_nodes[current] = (action, prev)
 				return self.reconstruct_path(init, current)
@@ -38,10 +38,10 @@ class AStar:
 				self.closed_nodes[current] = action, prev
 			for action, neighbor in current.get_neighbors():
 				next_ = BlockWorldHeuristic(state=str(neighbor))
-				self.histories[next_] = (action, current)
-				self.costs[next_] = self.costs[current] + 1
-				self.priorities[next_] = 0
-				priority_queue.put((self.costs[next_], next_))
+				next_.history = (action, current)
+				next_.cost = current.cost + 1
+				priority = next_.heuristic(goal_) + next_.cost
+				priority_queue.put((priority, next_))
 		return []
 
 	def reconstruct_path(self, init, last):
@@ -52,35 +52,3 @@ class AStar:
 			path_to_goal.append(action)
 		return list(reversed(path_to_goal))
 
-
-if __name__ == '__main__':
-	# Here you can test your algorithm. You can try different N values, e.g. 6, 7.
-	N = 5
-
-	start = BlockWorldHeuristic(N)
-	goal = BlockWorldHeuristic(N)
-
-	print("Searching for a path:")
-	print(f"{start} -> {goal}")
-	print()
-
-	astar = AStar()
-	path = astar.search(start, goal)
-
-	if path is not None:
-		print("Found a path:")
-		print(path)
-
-		print("\nHere's how it goes:")
-
-		s = start.clone()
-		print(s)
-
-		for a in path:
-			s.apply(a)
-			print(s)
-
-	else:
-		print("No path exists.")
-
-	print("Total expanded nodes:", BlockWorld.expanded)
