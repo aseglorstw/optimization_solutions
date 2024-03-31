@@ -1,3 +1,5 @@
+import numpy as np
+
 from blockworld import BlockWorldEnv
 import random
 
@@ -5,18 +7,43 @@ class QLearning():
 	# don't modify the methods' signatures!
 	def __init__(self, env: BlockWorldEnv):
 		self.env = env
+		self.q_function = dict()
+		self.episode = 1
+
+	def get_alpha(self):
+		alpha = 0.1
+		return alpha
+
+	def get_max_q_value(self, state, goal_state):
+		possible_actions = state.get_actions()
+		q_values = np.array([self.q_function.get((state, goal_state, action), 0) for action in possible_actions])
+		return np.max(q_values)
 
 	def train(self):
-		# Use BlockWorldEnv to simulate the environment with reset() and step() methods.
+		gamma = 0.9
+		while self.episode <= 8001:
+			is_terminate_state = False
+			current_state, goal_state = self.env.reset()
+			while not is_terminate_state:
+				action = self.act((current_state, goal_state))
+				(new_state, _), reward, is_terminate_state = self.env.step(action)
+				max_q = self.get_max_q_value(new_state, goal_state)
+				q_old = self.q_function.get((current_state, goal_state, action), 0)
+				self.q_function[(current_state, goal_state, action)] \
+					= q_old + self.get_alpha() * (reward + gamma * max_q - q_old)
+				current_state = new_state
+			self.episode += 1
 
-		# s = self.env.reset()
-		# s_, r, done = self.env.step(a)
+	def act(self, state):
+		epsilon = 0.1
+		current_state, goal_state = state
+		possible_actions = current_state.get_actions()
+		q_values = np.array(
+			[self.q_function.get((current_state, goal_state, action), 0) for action in possible_actions])
+		if np.random.rand() > epsilon:
+			return possible_actions[np.argmax(q_values)]
+		return possible_actions[np.random.randint(len(possible_actions))]
 
-		pass
-
-	def act(self, s):
-		random_action = random.choice( s[0].get_actions() )
-		return random_action
 
 if __name__ == '__main__':
 	# Here you can test your algorithm. Stick with N <= 4
