@@ -33,7 +33,7 @@ We'll provide templates and scripts for testing in both MATLAB and Python. The r
 </p>
 
 
-### Prokládání bodů kružnicí Solution
+### Intersecting Points of Circles Solution
 #### Objective:
 The task is to find the best-fitting circle for a given set of points in a 2D plane. This involves solving two subproblems, each formalizing the notion of "best-fitting" differently.
 
