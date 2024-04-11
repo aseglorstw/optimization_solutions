@@ -106,3 +106,28 @@ The goal is to approximately predict the average gross wage (PHM) for periods wh
 <p align="center">
   <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/lsq1/mzdy.svg?cache=">
 </p>
+
+
+### Nonlinear Least Squares (NLLS): Circle
+
+#### Objective:
+
+Minimize the sum of squared distances from the points to the circle.
+
+#### Methodology:
+1. Minimize the objective function using iterative methods such as Gauss-Newton, Levenberg-Marquardt, and gradient descent.
+2. For gradient descent, experiment with the step size and ensure non-negativity of the radius.
+3. Formulate the problem as a minimization of a function over (x0, y0) for a fixed radius r.
+
+#### Tasks:
+
+1. `LM_iter(X, x0, y0, r0, mu)`: Performs one iteration of Levenberg-Marquardt method.
+2. `GN_iter(X, x0, y0, r0)`: Performs one iteration of Gauss-Newton method.
+3. `grad_iter(X, x0, y0, r0, a)`: Performs one iteration of gradient descent with a given step size a.
+4. `get_objective_function(X)`: Retrieves the objective function for the given points X.
+
+
+<p align="center">
+  <img src="https://ltdfoto.ru/images/2024/04/11/b7f3203f-1a54-4c62-9a82-b17629106862.jpg">
+</p>
+
