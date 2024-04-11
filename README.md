@@ -12,7 +12,7 @@ The goal is to reduce data volume while retaining the essential characteristics 
   <img src="https://ltdfoto.ru/images/2024/04/11/85ef1759-95e3-4162-b961-33d521e3d131.jpg">
 </p>
 
-### LS: Gong Solution
+### Autoregressive model: Gong Solution
 
 #### Objective:
 
