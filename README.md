@@ -32,3 +32,28 @@ We'll provide templates and scripts for testing in both MATLAB and Python. The r
   <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/lsq2/gong.png">
 </p>
 
+
+### Prokládání bodů kružnicí Solution
+#### Objective:
+The task is to find the best-fitting circle for a given set of points in a 2D plane. This involves solving two subproblems, each formalizing the notion of "best-fitting" differently.
+
+#### Methodology:
+Minimization of Algebraic Distance:
+Formulate the problem as finding a circle that minimizes the sum of squared distances between the points and the circle. This involves approximating the circle using the equation of a conic section and solving the resulting optimization problem.
+Robust Fitting using RANSAC Algorithm:
+Implement the RANSAC (Random Sample Consensus) algorithm, which robustly estimates the parameters of the circle by iteratively fitting the circle to randomly sampled subsets of the data and selecting the model with the most inliers, i.e., points that are consistent with the model.
+Tasks:
+Implement the following functions:
+1. `d = dist(X, x0, y0, r)`: Computes the distances of points from the circle defined by center (x0, y0) and radius r.
+2. `[x0 y0 r] = quad_to_center(d, e, f)`: Converts the representation of the circle from the equation of a conic section to the standard circle equation.
+3. `[d e f] = fit_circle_nhom(X)`: Fits the circle using a non-homogeneous approach.
+4. `[d e f] = fit_circle_hom(X)`: Fits the circle using a homogeneous approach.
+5. `[x0 y0 r] = fit_circle_ransac(X, num_iter, threshold)`: Implements the RANSAC algorithm to robustly fit the circle to the data.
+These functions provide different strategies to find the best-fitting circle for the given points, addressing various aspects such as algebraic distance minimization and robustness to outliers.
+
+<p align="center">
+  <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/kruznice_lin/circle-fit-nhom.svg?w=300&tok=cf4b28" width="30%">
+  <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/kruznice_lin/circle-fit-hom.svg?w=300&tok=295d15" width="30%">  
+  <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/kruznice_lin/circle-fit-ransac.svg?w=300&tok=6e417b" width="30%">  
+</p>
+
