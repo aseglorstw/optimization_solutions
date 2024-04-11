@@ -57,3 +57,28 @@ These functions provide different strategies to find the best-fitting circle for
   <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/kruznice_lin/circle-fit-ransac.svg?w=300&tok=6e417b" width="30%">  
 </p>
 
+### Minimaxní lineární regrese Solution
+
+#### Objective:
+
+The task is to find the affine function that best approximates a given set of points in a way that minimizes the maximum absolute deviation from the function to the points.
+
+#### Methodology:
+
+1. **Linear Programming Formulation:** 
+   - Convert the problem into a linear program to find the parameters of the affine function that minimize the maximum absolute deviation.
+
+2. **Implementation of Functions:**
+   - Implement the function `minimaxfit(x, y)` to find the parameters `a` and `b` of the affine function, along with the minimum value `r` of the maximum absolute deviation criterion.
+   - Implement the function `plotline(x, y, a, b, r)` to visualize the points and the found band, specifically for the case when `n = 1`.
+
+#### Tasks:
+
+- Convert the problem into a linear program.
+- Implement the function `minimaxfit(x, y)` to find the parameters of the affine function.
+- Implement the function `plotline(x, y, a, b, r)` to visualize the points and the found band, specifically for the case when `n = 1`.
+
+<p align="center">
+  <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/lp1/linefit/body2.svg?w=400&tok=45a329">
+</p>
+
