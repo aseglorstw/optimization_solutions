@@ -1,4 +1,4 @@
-### PCA: Motion Capture Solution
+### PCA: Motion Capture 
 
 In this solution, I'll be using PCA (Principal Component Analysis) to fit points in space with a linear or affine subspace and minimize the error. 
 
@@ -12,7 +12,7 @@ The goal is to reduce data volume while retaining the essential characteristics 
   <img src="https://ltdfoto.ru/images/2024/04/11/85ef1759-95e3-4162-b961-33d521e3d131.jpg">
 </p>
 
-### Autoregressive model: Gong Solution
+### Autoregressive model: Gong 
 
 #### Objective:
 
@@ -33,7 +33,7 @@ We'll provide templates and scripts for testing in both MATLAB and Python. The r
 </p>
 
 
-### Intersecting Points of Circles Solution
+### Intersecting Points of Circles 
 #### Objective:
 The task is to find the best-fitting circle for a given set of points in a 2D plane. This involves solving two subproblems, each formalizing the notion of "best-fitting" differently.
 
@@ -57,7 +57,7 @@ These functions provide different strategies to find the best-fitting circle for
   <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/kruznice_lin/circle-fit-ransac.svg?w=300&tok=6e417b" width="30%">  
 </p>
 
-### Minimaxní lineární regrese Solution
+### Minimax Linear Regression
 
 #### Objective:
 
