@@ -82,3 +82,27 @@ The task is to find the affine function that best approximates a given set of po
   <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/lp1/linefit/body2.svg?w=400&tok=45a329">
 </p>
 
+### Linear Regression
+
+#### Objective:
+
+The goal is to approximately predict the average gross wage (PHM) for periods where the wage values are unknown. This is achieved by first finding a function that best fits the given wage data and then using this function to estimate the wage for the desired time period.
+
+#### Methodology:
+
+1. **Linear Function Estimation:**
+   - We will seek a linear function to represent the relationship between time and wage, given by:
+   ^M(t) = x1 + x2t
+   where ^M(t) is the estimated wage at time t, and x1, x2 ∈ R are the parameters to be determined.
+
+2. **Parameter Estimation:**
+   - We will determine the optimal parameters from the wage sample using the method of least squares, minimizing the sum of squares of differences between the actual and estimated wages.
+
+#### Tasks:
+
+- Implement the function `x = fit_wages(t, M)` where t and M are vectors of length m containing times and wages, respectively, and x is a vector of length 2 with parameters (x1, x2).
+- Implement the function `M = quarter2_2009(x)` which calculates the estimated PHM in the second quarter of 2009 for the parameters x obtained from the function `fit_wages`.
+
+<p align="center">
+  <img src="https://cw.fel.cvut.cz/wiki/_media/courses/b0b33opt/cviceni/hw/lsq1/mzdy.svg?cache=">
+</p>
