@@ -8,8 +8,8 @@ The main focus will be on approximating motion capture data with lower-dimension
 #### Methodology:
 The goal is to reduce data volume while retaining the essential characteristics of the motion. I'll implement functions to fit the data to subspace representations, visualize the results, and analyze the compression error across different dimensions of the subspace.
 
-<p>
-  <img src="https://ltdfoto.ru/images/2024/04/11/85ef1759-95e3-4162-b961-33d521e3d131.jpg">
+<p align="center">
+  <img src="https://i.postimg.cc/SsmvtsYQ/pca.jpg">
 </p>
 
 ### Autoregressive model: Gong 
@@ -128,6 +128,6 @@ Minimize the sum of squared distances from the points to the circle.
 
 
 <p align="center">
-  <img src="https://ltdfoto.ru/images/2024/04/11/b7f3203f-1a54-4c62-9a82-b17629106862.jpg">
+  <img src="https://i.postimg.cc/cHKXzn4S/cirles.jpg">
 </p>
 
